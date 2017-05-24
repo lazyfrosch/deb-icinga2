@@ -57,4 +57,4 @@ echo "# You can update the version with the following command:"
 echo "#  dch --changelog $target/debian/changelog --newversion '$version_debian' --distribution 'icinga-$target'"
 echo "#"
 
-diff -Naur -x "changelog" .debian_packaging/debian/ "$target"/debian/
+diff -Naur -x "changelog" "$target"/debian/ .debian_packaging/debian/
