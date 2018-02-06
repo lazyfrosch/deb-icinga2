@@ -1,3 +1,10 @@
+icinga2 (2.9.0-0) icinga-wheezy; urgency=medium
+
+  * Prepare updating to 2.9.0
+  * Remove icinga2-studio package
+
+ -- Markus Frosch <markus.frosch@icinga.com>  Tue, 06 Feb 2018 15:19:46 +0100
+
 icinga2 (2.8.1-1) icinga-wheezy; urgency=medium
 
   * Update to 2.8.1
