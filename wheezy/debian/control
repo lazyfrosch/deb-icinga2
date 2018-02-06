@@ -24,7 +24,6 @@ Build-Depends: bash-completion,
                libssl-dev,
                libyajl-dev,
                libedit-dev,
-# not on wheezy:               libwxgtk3.0-dev,
                make (>= 3.81),
                po-debconf
 Standards-Version: 3.9.8
