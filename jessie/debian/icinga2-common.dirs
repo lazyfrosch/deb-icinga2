@@ -1,4 +1,5 @@
 etc/icinga2/pki
+usr/share/icinga2
 var/cache/icinga2
 var/lib/icinga2
 var/lib/icinga2/api/log
