@@ -47,14 +47,16 @@ trap '' 13 # SIGPIPE
 
 # check run directory
 check_run () {
-  test -d '/var/run/icinga2' || mkdir /var/run/icinga2
-  test -d '/var/run/icinga2/cmd' || mkdir /var/run/icinga2/cmd
+  if [ ! -e '/var/run/icinga2' ]; then
+    mkdir /var/run/icinga2
+    mkdir /var/run/icinga2/cmd
 
-  chown "$DAEMON_USER":"$DAEMON_GROUP" /var/run/icinga2
-  chmod 0755 /var/run/icinga2
+    chown "$DAEMON_USER":"$DAEMON_CMDGROUP" /var/run/icinga2/cmd
+    chmod 2710 /var/run/icinga2/cmd
 
-  chown "$DAEMON_USER":"$DAEMON_CMDGROUP" /var/run/icinga2/cmd
-  chmod 2710 /var/run/icinga2/cmd
+    chown "$DAEMON_USER":"$DAEMON_GROUP" /var/run/icinga2
+    chmod 0755 /var/run/icinga2
+  fi
 }
 
 check_config () {
@@ -128,7 +130,7 @@ do_reload() {
   # restarting (for example, when it is sent a SIGHUP),
   # then implement that here.
   #
-  start-stop-daemon --stop --signal 1 --quiet --pidfile $PIDFILE --name $NAME
+  start-stop-daemon --stop --signal HUP --quiet --pidfile $PIDFILE --name $NAME
   return 0
 }
 
