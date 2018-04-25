@@ -1,3 +1,9 @@
+icinga2 (2.8.4-1) icinga-ubuntu; urgency=medium
+
+  * Update to 2.8.4
+
+ -- Jean Flach <jean-marcel.flach@netways.de>  Wed, 25 Apr 2018 15:02:06 +0200
+
 icinga2 (2.8.3-1) icinga-ubuntu; urgency=medium
 
   * Update to 2.8.3
