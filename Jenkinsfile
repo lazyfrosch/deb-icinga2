@@ -1,3 +1,15 @@
+def targets = [ "debian/stretch", "ubuntu/xenial" ]
+
+/*
+def build_nodes = [:]
+
+targets.each() {
+    build_nodes[it] = {
+        node(it) {
+    }
+}
+*/
+
 pipeline {
     agent none
 
@@ -7,13 +19,28 @@ pipeline {
 
     stages {
         stage('Build') {
-            agent {
-                docker { image 'registry.icinga.com/build-docker/debian/stretch:x86_64' }
+            parallel {
+            stage("debian/stretch") {
+                agent {
+                    docker { image "registry.icinga.com/build-docker/debian/stretch:x86_64" }
+                }
+                steps {
+                    sh 'icinga-build-package'
+                    archive 'build/'
+                }
             }
-            steps {
-                sh 'icinga-build-package'
+            stage("ubuntu/xenial") {
+                agent {
+                    docker { image "registry.icinga.com/build-docker/ubuntu/xenial:x86_64" }
+                }
+                steps {
+                    sh 'icinga-build-package'
+                    archive 'build/'
+                }
+            }
             }
         }
+        /*
         stage('Test') {
             agent {
                 docker { image 'registry.icinga.com/build-docker/debian/stretch:x86_64' }
@@ -23,5 +50,8 @@ pipeline {
                 sh 'icinga-build-test'
             }
         }
+        */
     }
 }
+
+// vi: filetype=groovy
