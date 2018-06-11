@@ -4,15 +4,21 @@ set -ex
 
 #This should work for any .deb Package
 
-cd archive
+if [ -d archive ]; then
+    cd archive
 
-apt-ftparchive packages . > Packages
+    apt-ftparchive packages . > Packages
 
-sudo su -c 'echo "deb [trusted=yes] file:$(pwd)/ ./" >>  /etc/apt/sources.list'
+    sudo su -c 'echo "deb [trusted=yes] file:$(pwd)/ ./" >>  /etc/apt/sources.list'
 
-sudo apt-get update
+    sudo apt-get update
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --allow-unauthenticated -y icinga2 icinga2-ido-mysql mysql-server
+    cd ../
+fi
+
+export DEBIAN_FRONTEND=noninteractive
+
+sudo apt-get install -y icinga2 icinga2-ido-mysql mysql-server
 
 sudo icinga2 feature list
 
